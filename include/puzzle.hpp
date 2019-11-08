@@ -1,7 +1,7 @@
 #ifndef PUZZLE_HPP
 #define PUZZLE_HPP
 
-#include <iostream>
+#include <SFML/Graphics.hpp>
 #include "board.hpp"
 
 class puzzle

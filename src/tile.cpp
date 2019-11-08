@@ -1,6 +1,4 @@
 #include "tile.hpp"
-#include <thread>
-#include <functional>
 #include "constants.hpp"
 
 tile::tile(sf::RenderWindow* w, const std::string& path, const sf::Vector2f& v):

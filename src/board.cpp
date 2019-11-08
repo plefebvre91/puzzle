@@ -1,6 +1,5 @@
 #include "board.hpp"
 #include "constants.hpp"
-#include <iostream>
 
 board::board(sf::RenderWindow* w)
 {

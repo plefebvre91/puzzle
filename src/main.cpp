@@ -1,6 +1,3 @@
-#include <iostream>
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include "puzzle.hpp"
 
 int main(int argc, char** argv)
