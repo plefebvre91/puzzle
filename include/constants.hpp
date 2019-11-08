@@ -1,0 +1,14 @@
+#ifndef CONSTANTS_HPP
+#define CONSTANTS_HPP
+
+#define PUZZLE_APP_TITLE "Puzzle"
+#define PUZZLE_WINDOW_SIZE 600
+#define PUZZLE_TILE_SIZE (PUZZLE_WINDOW_SIZE/3)
+
+#define PUZZLE_ANIM_DURATION 300
+
+#define PUZZLE_NB_TILE   9
+#define PUZZLE_MAX_INDEX 8
+
+
+#endif
