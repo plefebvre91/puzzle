@@ -7,8 +7,19 @@
 class puzzle
 {
 public:
-  puzzle();  
+  /**
+   * Constructor
+   */
+  puzzle();
+
+  /**
+   * Launch application
+   */
   void run();
+
+  /**
+   * Destructor
+   */
   ~puzzle();
   
 private:
