@@ -7,51 +7,38 @@
 
 board::board(sf::RenderWindow* w)
 {
-  libre = 8;
-
-  for(int i=0; i<PUZZLE_MAX_INDEX; i++) {
+  for(int i=0; i<PUZZLE_MAX_INDEX+1; i++)
     indices.push_back(i);
-    std::cout << i << "\n";
-  }
-
-  indices.push_back(8);
   
   unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
   shuffle (indices.begin(), indices.end(), std::default_random_engine(seed));
 
   int i=0;
   for(auto index: indices)
-    {
-      if(index != 8){
-	sf::Vector2i d(i % 3, i / 3);
-	sf::Vector2f p(d.x * PUZZLE_TILE_SIZE, d.y * PUZZLE_TILE_SIZE);
-	
-	std::string path = "../resources/default/"
-	  + std::to_string(index) + ".jpg";
-	std::cout << "loading: " << path << std::endl;
-      std::cout << index << " ";
-      tiles.push_back(new tile(w, path, p));
+  {
+    sf::Vector2i d(i % 3, i / 3);
+    sf::Vector2f p(d.x * PUZZLE_TILE_SIZE, d.y * PUZZLE_TILE_SIZE);
+    std::string path = "../resources/social/" + std::to_string(index) + ".png";
+ 
+    if(index == PUZZLE_MAX_INDEX)
+      libre = i;
 
-      }
-      else
-	{
-	  sf::Vector2i d(i % 3, i / 3);
-	  sf::Vector2f p(d.x * PUZZLE_TILE_SIZE, d.y * PUZZLE_TILE_SIZE);
-
-	std::string path = "../resources/default/image.jpg";
-	tiles.push_back(new tile(w, path, p));
-	libre = i;
-      }
-      i++;    
-
-    }
-
-  std::cout << std::endl;
+    tiles.push_back(new tile(w, path, p));
+    i++;    
+  }
+  
+  buffer[0].loadFromFile("../resources/snd/move.wav");
+  buffer[1].loadFromFile("../resources/snd/wrong_move.wav");
+  sound[0].setBuffer(buffer[0]);
+  sound[1].setBuffer(buffer[1]);
 }
 
 
 void board::update(direction d)
 {
+  unsigned int free_tile_index;
+  unsigned int moving_tile_index;
+
   if(d == direction::up)
     {
 
@@ -63,7 +50,10 @@ void board::update(direction d)
 	  
 	  std::swap<int>(indices[libre], indices[libre-3]);
 	  std::swap<tile*>(tiles[libre], tiles[libre-3]);
+	  sound[0].play();
 	}
+      else
+	sound[1].play();
     }
     
   else if(d == direction::down)
@@ -75,7 +65,10 @@ void board::update(direction d)
 	  tiles[libre+3]->move(direction::up);
 	  std::swap<int>(indices[libre], indices[libre+3]);
 	  std::swap<tile*>(tiles[libre], tiles[libre+3]);
+	  sound[0].play();
 	}
+      else
+	sound[1].play();
     }
 
     
@@ -88,7 +81,10 @@ void board::update(direction d)
 	  tiles[libre-1]->move(direction::right);
 	  std::swap<int>(indices[libre], indices[libre-1]);
 	  std::swap<tile*>(tiles[libre], tiles[libre-1]);
+	  sound[0].play();
 	}
+      else
+	sound[1].play();
     }
     
   else if(d == direction::right)
@@ -100,11 +96,29 @@ void board::update(direction d)
 	  tiles[libre+1]->move(direction::left);
 	  std::swap<int>(indices[libre], indices[libre+1]);
 	  std::swap<tile*>(tiles[libre], tiles[libre+1]);
+	  sound[0].play();
 	}
+      else
+	sound[1].play();
     }
   else
     {
+        sound[1].play();
     }
+}
+
+bool board::is_finished() const
+{
+  int i = 0;
+  bool done = true;
+
+  while((i < PUZZLE_MAX_INDEX) && done)
+    {
+      done = (bool)(indices[i] == i);
+      i++;
+    }
+  
+  return done;
 }
 
 
@@ -119,4 +133,3 @@ board::~board()
   for(auto t : tiles)
     delete t;
 }
-

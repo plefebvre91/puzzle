@@ -1,5 +1,6 @@
 #include "puzzle.hpp"
 #include "constants.hpp"
+#include <iostream>
 
 puzzle::puzzle()
 {
@@ -32,11 +33,14 @@ void puzzle::run()
 	if (event.type == sf::Event::Closed)
 	  window->close();
     }
-
+    
     window->clear();
     game->display();
     window->display();
 
+    if(game->is_finished())
+      std::cout << "Done." << std::endl;
+    
   }
 }
 

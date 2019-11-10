@@ -16,7 +16,7 @@ public:
    * Launch application
    */
   void run();
-
+  
   /**
    * Destructor
    */

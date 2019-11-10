@@ -2,6 +2,7 @@
 #define BOARD_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "direction.hpp"
 #include "tile.hpp"
 
@@ -25,6 +26,12 @@ public:
    */
   void display() const;
 
+
+  /**
+   * Returns true if all tiles are at the right place
+   */
+  bool is_finished() const;
+  
   /**
    * Destructor
    */
@@ -32,6 +39,9 @@ public:
 
 private:
   int libre;
+
+  sf::SoundBuffer buffer[2];
+  sf::Sound sound[2];
   /**
    * Tiles set
    */

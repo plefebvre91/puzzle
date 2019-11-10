@@ -128,5 +128,6 @@ void tile::move(direction d)
   int dir = (int)d;
   
   thread[dir]->launch();
+  
 }
 
