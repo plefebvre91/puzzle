@@ -25,7 +25,7 @@ public:
    * \param direction to move
    */
   void move(direction d);
-  
+    sf::Vector2f position;
 private:
   /**
    * Animation threads
@@ -39,7 +39,7 @@ private:
   /**
    * Tile position
    */
-  sf::Vector2f position;
+
 
   /**
    * Texture associated to the sprite

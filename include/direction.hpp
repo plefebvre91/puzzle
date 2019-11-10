@@ -4,9 +4,9 @@
 enum class direction
 {
   up = 0,
-  down,
-  left,
-  right
+  down = 1,
+  left = 2,
+  right = 3
 };
 
 #endif

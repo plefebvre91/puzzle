@@ -2,7 +2,7 @@
 #include "constants.hpp"
 
 tile::tile(sf::RenderWindow* w, const std::string& path, const sf::Vector2f& v):
-    position(v),texture(),sprite()
+  position(v),texture(),sprite(),thread()
   {
     window = w;
     texture.loadFromFile(path);
@@ -45,6 +45,8 @@ void tile::move_thread_up()
       sprite.setPosition(position);
       dt = after - now;
     } while(dt < t_max);
+
+  position.y = old - 200;
 }
 
 
@@ -66,6 +68,8 @@ void tile::move_thread_down()
       sprite.setPosition(position);
       dt = after - now;
     } while(dt < t_max);
+
+    position.y = old + 200;
 }
 
 
@@ -87,6 +91,8 @@ void tile::move_thread_left()
       sprite.setPosition(position);
       dt = after - now;
     } while(dt < t_max);
+
+    position.x = old - 200;
 }
 
 
@@ -110,6 +116,8 @@ void tile::move_thread_right()
       sprite.setPosition(position);
       dt = after - now;
     } while(dt < t_max);
+
+  position.x = old + 200;
 }
 
 
@@ -118,7 +126,7 @@ void tile::move_thread_right()
 void tile::move(direction d)
 {
   int dir = (int)d;
-
+  
   thread[dir]->launch();
 }
 

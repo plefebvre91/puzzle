@@ -4,9 +4,8 @@
 puzzle::puzzle()
 {
   window = new
-    sf::RenderWindow(sf::VideoMode( PUZZLE_WINDOW_SIZE, PUZZLE_WINDOW_SIZE),
-		     PUZZLE_APP_TITLE);
-  
+    sf::RenderWindow(sf::VideoMode( PUZZLE_WINDOW_SIZE, PUZZLE_WINDOW_SIZE), PUZZLE_APP_TITLE);
+  window->setVerticalSyncEnabled(true);
   game = new board(window);
 }
   
