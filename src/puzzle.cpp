@@ -34,6 +34,9 @@ puzzle::puzzle()
   
 void puzzle::run()
 {
+
+  bool game_is_finished = false;
+  
   // Start the game loop
   while (window->isOpen())
   {
@@ -60,10 +63,17 @@ void puzzle::run()
     game->display();
     window->display();
 
-    if(game->is_finished())
-      std::cout << "Done." << std::endl;
-    
+    game_is_finished = game->is_finished();
   }
+
+  if(game_is_finished)
+  {
+    std::cout << "Congratulations !\n" << std::endl;
+  }
+  
+  if(window->isOpen())
+      window->close();
+  
 }
 
 puzzle::~puzzle()

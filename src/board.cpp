@@ -42,16 +42,17 @@ board::board(sf::RenderWindow* w)
     sf::Vector2i d(i % 3, i / 3);
     sf::Vector2f p(d.x * PUZZLE_TILE_SIZE, d.y * PUZZLE_TILE_SIZE);
     std::string path = "../resources/social/" + std::to_string(index) + ".png";
- 
+
     if(index == PUZZLE_MAX_INDEX)
       libre = i;
 
     tiles.push_back(new tile(w, path, p));
     i++;    
   }
-  
+
   buffer[0].loadFromFile("../resources/snd/move.wav");
   buffer[1].loadFromFile("../resources/snd/wrong_move.wav");
+
   sound[0].setBuffer(buffer[0]);
   sound[1].setBuffer(buffer[1]);
 }
@@ -59,9 +60,6 @@ board::board(sf::RenderWindow* w)
 
 void board::update(direction d)
 {
-  unsigned int free_tile_index;
-  unsigned int moving_tile_index;
-
   if(d == direction::up)
     {
 
@@ -130,16 +128,17 @@ void board::update(direction d)
     }
 }
 
+
 bool board::is_finished() const
 {
   int i = 0;
   bool done = true;
 
   while((i < PUZZLE_MAX_INDEX) && done)
-    {
-      done = (bool)(indices[i] == i);
-      i++;
-    }
+  {
+    done = (bool)(indices[i] == i);
+    i++;
+  }
   
   return done;
 }
@@ -150,6 +149,7 @@ void board::display() const
   for(auto t : tiles)
     t->display();
 }
+
 
 board::~board()
 {

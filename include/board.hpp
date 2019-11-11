@@ -49,7 +49,6 @@ public:
    */
   void display() const;
 
-
   /**
    * Returns true if all tiles are at the right place
    */
