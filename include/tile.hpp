@@ -25,6 +25,7 @@ SOFTWARE. */
 #define TILE_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 #include "direction.hpp"
 
 class tile
@@ -48,7 +49,7 @@ public:
    * \param direction to move
    */
   void move(direction d);
-    sf::Vector2f position;
+
 private:
   /**
    * Animation threads
@@ -62,7 +63,7 @@ private:
   /**
    * Tile position
    */
-
+  sf::Vector2f position;
 
   /**
    * Texture associated to the sprite
@@ -83,6 +84,12 @@ private:
    * Animation thread pool
    */
   std::vector<sf::Thread*> thread;
+
+  /**
+   * Protect position updates
+   */
+  sf::Mutex mutex;
+
 };
 
 
